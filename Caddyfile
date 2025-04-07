@@ -1,0 +1,23 @@
+lucagaetano.duckdns.org {
+    reverse_proxy /_matrix/* http://localhost:8008
+    reverse_proxy /_synapse/client/* http://localhost:8008
+
+    # Proxy per la federazione
+    reverse_proxy https://localhost:8008 {
+        header_up Host {host}
+    }
+
+    # Well-known per la federazione
+    handle_path /.well-known/matrix/server {
+        respond `{"m.server": "lucagaetano.duckdns.org:443"}` 200
+    }
+   
+    handle_path /.well-known/matrix/client {
+        header Content-Type application/json
+        respond `{"m.homeserver": {"base_url": "https://lucagaetano.duckdns.org"}}` 200
+    }
+}
+
+lucagaetano.duckdns.org:8449 {
+    reverse_proxy http://localhost:8008
+}
