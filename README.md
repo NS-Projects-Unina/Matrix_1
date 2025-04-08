@@ -29,6 +29,5 @@
   - lato client
   - lato server
 - Studio degli aspetti di sicurezza
-  - dump del traffico
-  - dump del database
 - Studio di possibili scenari di attacco
+  - Sviluppo keylogger per Windows
